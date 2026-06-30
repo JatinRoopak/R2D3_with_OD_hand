@@ -93,6 +93,17 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Added Gripper controllers
+    load_l_gripper_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'l_gripper_controller'],
+        output='screen'
+    )
+    
+    load_r_gripper_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'r_gripper_controller'],
+        output='screen'
+    )
+
     # Event Handlers for Boot Sequence 
     # Start joint state broadcaster after robot spawns
     close_evt1 = RegisterEventHandler( 
@@ -110,7 +121,9 @@ def generate_launch_description():
                 load_left_arm_controller,
                 load_right_arm_controller,
                 load_platform_controller,
-                load_agv_controller
+                load_agv_controller,
+                load_l_gripper_controller, 
+                load_r_gripper_controller
             ]
         )
     )
